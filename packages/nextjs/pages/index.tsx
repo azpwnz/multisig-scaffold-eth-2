@@ -2,8 +2,17 @@ import type { NextPage } from "next";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { Address } from "~~/components/scaffold-eth/Address";
 import { Balance } from "~~/components/scaffold-eth/Balance";
+import { useScaffoldEventHistory } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
+  const { data: events } = useScaffoldEventHistory({
+    contractName: "MetaMultiSigWallet",
+    eventName: "Owner",
+    fromBlock: 0n,
+  });
+  
+  console.log("💚 Events: ", events);
+
   return (
     <>
       <MetaHeader />
@@ -12,6 +21,14 @@ const Home: NextPage = () => {
           <Balance address={"0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"} />
 
           <Address address={"0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"} />
+
+          <ul>
+            {events?.map(event => (
+              <li key={event.log.logIndex}>
+                {event.args.owner} - {event.args.added ? "TRUE" : "FALSE"}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>
