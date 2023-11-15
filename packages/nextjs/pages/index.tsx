@@ -10,7 +10,7 @@ const Home: NextPage = () => {
     eventName: "Owner",
     fromBlock: 0n,
   });
-  
+
   console.log("💚 Events: ", events);
 
   return (
@@ -24,8 +24,8 @@ const Home: NextPage = () => {
 
           <ul>
             {events?.map(event => (
-              <li key={event.log.logIndex}>
-                {event.args.owner} - {event.args.added ? "TRUE" : "FALSE"}
+              <li key={`${event.log.transactionHash}-${event.log.logIndex}`}>
+                <Address address={event.args.owner} /> - {event.args.added ? "TRUE" : "FALSE"}
               </li>
             ))}
           </ul>

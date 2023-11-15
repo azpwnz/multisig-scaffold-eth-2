@@ -33,7 +33,7 @@ const Owners: NextPage = () => {
         <div className="p-2">
           <ul>
             {events?.map(event => (
-              <li key={event.log.logIndex}>
+              <li key={`${event.log.transactionHash}-${event.log.logIndex}`}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <Address address={event.args.owner} />
                   <span>{event.args.added ? "TRUE" : "FALSE"}</span>
