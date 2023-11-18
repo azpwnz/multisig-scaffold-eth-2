@@ -18,17 +18,24 @@ const Home: NextPage = () => {
       <MetaHeader />
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
-          <Balance address={"0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"} />
+          <div className="p-2">
+            <Balance address={"0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"} />
+          </div>
 
-          <Address address={"0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"} />
+          <div className="p-2">
+            <Address address={"0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"} />
+          </div>
 
-          <ul>
-            {events?.map(event => (
-              <li key={`${event.log.transactionHash}-${event.log.logIndex}`}>
-                <Address address={event.args.owner} /> - {event.args.added ? "TRUE" : "FALSE"}
-              </li>
-            ))}
-          </ul>
+          <div className="p-2">
+            <h2>Events</h2>
+            <ul>
+              {events?.map(event => (
+                <li key={`${event.log.transactionHash}-${event.log.logIndex}`}>
+                  <Address address={event.args.owner} /> - {event.args.added ? "TRUE" : "FALSE"}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </>
