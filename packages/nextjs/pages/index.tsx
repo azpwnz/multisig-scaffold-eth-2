@@ -18,12 +18,14 @@ const Home: NextPage = () => {
       <MetaHeader />
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
-          <div className="p-2">
-            <Balance address={"0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"} />
-          </div>
+          <div className="border-2 border-gray-400 rounded-md">
+            <div className="p-2">
+              <Balance address={"0x5FbDB2315678afecb367f032d93F642f64180aa3"} />
+            </div>
 
-          <div className="p-2">
-            <Address address={"0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"} />
+            <div className="p-2">
+              <Address address={"0x5FbDB2315678afecb367f032d93F642f64180aa3"} />
+            </div>
           </div>
 
           <div className="p-2">

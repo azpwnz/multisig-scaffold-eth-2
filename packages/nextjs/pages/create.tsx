@@ -14,6 +14,9 @@ import {
   useScaffoldEventHistory,
 } from "~~/hooks/scaffold-eth";
 
+import axios from 'axios';
+import {hardhat} from "viem/chains";
+
 const CreateTx: NextPage = () => {
   const [transactionType, setTransactionType] = useState("Send ETH");
   const [toAddressValue, setToAddressValue] = useState("");
@@ -74,11 +77,29 @@ const CreateTx: NextPage = () => {
     console.log("🌳 messageSignature", messageSignature);
     console.log("🌳 recover", recover);
     console.log("🌳 amount", ethAmount);
+    console.log("🌳 type amount", typeof ethAmount);
     console.log("🌳 nonce", nonce);
+    console.log("🌳 type nonce", typeof nonce);
     console.log("🌳 isOwner", isOwner);
     console.log("--------------------");
 
+    // if (!isOwner) {
+    //   console.error("Not owner");
+    //   return;
+    // }
     // TODO post transaction to backend
+    const BACKEND_URL = "http://localhost:3005/";
+    const res = await axios.post(BACKEND_URL, {
+      chainId: hardhat.id,
+      address: metaMultiSigWalletContract?.address,
+      nonce: nonce.toString(),
+      to: toAddressValue,
+      amount: ethAmount,
+      data: callData,
+      hash: newHash,
+      signatures: [messageSignature],
+      signers: [recover],
+    });
   };
 
   useEffect(() => {
